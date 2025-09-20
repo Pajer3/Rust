@@ -1,22 +1,15 @@
 use std::io;
 
-fn main() {
-    println!("Write a number");
+fn main() { 
+    let x: i32 = 5;
+    println!("{}",return_function(x));
 
-    let mut answer = String::new();
-
-    io::stdin()
-        .read_line(&mut answer)
-        .expect("Failed to read line");
-
-    let x: i32 = answer
-        .trim()
-        .parse()
-        .expect("Please type a number");
-
-    another_function(x);
 }
 
-fn another_function(number: i32)  {
-    println!("the number is {number}");
+fn another_function(number: i32, word: String)  {
+    println!("the number is {number} and your word is {word}");
+}
+
+fn return_function(number: i32) -> i32 {
+    6
 }
