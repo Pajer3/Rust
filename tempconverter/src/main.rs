@@ -1,48 +1,64 @@
 use std::io;
 
 fn main() {
-    println!("Welcome to the temprature converter");
-    println!("Would you like to \n
-    A: Convert to Celius \n
-    B: Convert to Fahrenheit \n
+    println!("Welcome to the temperature converter!");
 
-    Press number: 1 for A, and number 2 for B.
-    ");
+    'outer: loop {
+        println!("Choose an option:");
+        println!("1: Convert Fahrenheit → Celsius");
+        println!("2: Convert Celsius → Fahrenheit");
+        println!("Any other key to quit");
 
-    'outer_loop: loop {
-        let mut user_number: String = String::new();
-
-        if io::stdin().read_line(&mut user_number).is_err() {
-            eprintln!("Failed to capture a valid number");
+        // First input: menu choice
+        let mut choice = String::new();
+        if io::stdin().read_line(&mut choice).is_err() {
+            eprintln!("Failed to read input");
             continue;
-        } 
+        }
 
-        let user_number: f64 = match user_number.trim().parse::<f64>()
-        {
-            Ok(user_number) = f64,
-            Err(_) => continue,
+        let choice: i64 = match choice.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                eprintln!("Invalid choice.");
+                continue;
+            }
         };
-        
-        if user_number == 1 {
-            convert_to_celius(user_number);
-        } else  if  user_number == 2 {
-            convert_to_fahrenheit(user_number.to_string().trim().parse::<f64>());
+
+        // Exit if not 1 or 2
+        if choice != 1 && choice != 2 {
+            println!("Please write a number 1 or 2");
+            continue;
+        }
+
+        // Second input: temperature value
+        println!("Enter the temperature value:");
+        let mut temp_input = String::new();
+        if io::stdin().read_line(&mut temp_input).is_err() {
+            eprintln!("Failed to read input");
+            continue;
+        }
+
+        let temp: f64 = match temp_input.trim().parse() {
+            Ok(val) => val,
+            Err(_) => {
+                eprintln!("Invalid number.");
+                continue;
+            }
+        };
+
+        // Perform conversion
+        if choice == 1 {
+            println!("{temp}°F = {}°C", convert_to_celsius(temp));
         } else {
-            break 'outer_loop;
+            println!("{temp}°C = {}°F", convert_to_fahrenheit(temp));
         }
     }
-
-
 }
 
-fn convert_to_celius(x: f64) -> String {
-    let celsius = 5.0 / 9.0 * (x - 32);
-    let result = println!("{celsius}");
-    result
+fn convert_to_celsius(x: f64) -> f64 {
+    (x - 32.0) * 5.0 / 9.0
 }
 
-fn convert_to_fahrenheit(x: f64) -> String {
-    let fahrenheit = x * 9.0 / 5.0 + 32.0;
-    let result = println!("{fahrenheit}");
-    result
+fn convert_to_fahrenheit(x: f64) -> f64 {
+    x * 9.0 / 5.0 + 32.0
 }
