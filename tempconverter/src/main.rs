@@ -2,21 +2,25 @@ use std::io;
 
 fn main() {
     println!("Welcome to the temperature converter!");
+    println!("Enter conversion type and value in one line:");
+    println!("Example: 1 100  → converts 100°F to Celsius");
+    println!("         2 37   → converts 37°C to Fahrenheit");
+    println!("Any other input exits.");
 
     'outer: loop {
-        println!("Choose an option:");
-        println!("1: Convert Fahrenheit → Celsius");
-        println!("2: Convert Celsius → Fahrenheit");
-        println!("Any other key to quit");
-
-        // First input: menu choice
-        let mut choice = String::new();
-        if io::stdin().read_line(&mut choice).is_err() {
+        let mut input = String::new();
+        if io::stdin().read_line(&mut input).is_err() {
             eprintln!("Failed to read input");
             continue;
         }
 
-        let choice: i64 = match choice.trim().parse() {
+        let parts: Vec<&str> = input.trim().split_whitespace().collect();
+        if parts.len() != 2 {
+            eprintln!("Please provide exactly two values.");
+            continue;
+        }
+
+        let choice: i64 = match parts[0].parse() {
             Ok(num) => num,
             Err(_) => {
                 eprintln!("Invalid choice.");
@@ -24,33 +28,21 @@ fn main() {
             }
         };
 
-        // Exit if not 1 or 2
-        if choice != 1 && choice != 2 {
-            println!("Please write a number 1 or 2");
-            continue;
-        }
-
-        // Second input: temperature value
-        println!("Enter the temperature value:");
-        let mut temp_input = String::new();
-        if io::stdin().read_line(&mut temp_input).is_err() {
-            eprintln!("Failed to read input");
-            continue;
-        }
-
-        let temp: f64 = match temp_input.trim().parse() {
+        let temp: f64 = match parts[1].parse() {
             Ok(val) => val,
             Err(_) => {
-                eprintln!("Invalid number.");
+                eprintln!("Invalid temperature.");
                 continue;
             }
         };
 
-        // Perform conversion
         if choice == 1 {
             println!("{temp}°F = {}°C", convert_to_celsius(temp));
-        } else {
+        } else if choice == 2 {
             println!("{temp}°C = {}°F", convert_to_fahrenheit(temp));
+        } else {
+            println!("Please provide the program with right value's");
+            continue;
         }
     }
 }
