@@ -31,8 +31,7 @@ fn main() {
     let mut fib_two: u128 = 1;
     
     loop { 
-
-        let mut result: u128 = fib_one + fib_two;
+        let result: u128 = fib_one + fib_two;
 
         println!("{} + {} = {}", fib_one, fib_two, result);
 
