@@ -1,13 +1,9 @@
 fn main() {
+    let array: [i32; 5] = [10, 20, 30, 40, 50];
 
-    let mut x: usize = 0;
-    
-    loop {
-        x += 1;
-        println!("{}",x);
-
-        if x == 30 {
-            break x * 2;
-        }
+    for number in (1..4).rev() {
+        println!("the value is {number}");
     };
+
+
 }
