@@ -6,6 +6,11 @@ pub mod hosting {
     pub fn seat_at_table() {
         // placeholder
     }
+    pub mod random {
+        pub fn random() {
+            
+        }
+    }
 }
 
 pub mod serving {
