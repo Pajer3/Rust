@@ -1,5 +1,5 @@
 pub mod hosting {
-    pub fn add_to_waitlist() {
+    fn add_to_waitlist() {
         // placeholder
     }
 
@@ -9,7 +9,7 @@ pub mod hosting {
 }
 
 pub mod serving {
-    pub fn take_order() {
+    pub fn   take_order() {
         // placeholder
     }
 
