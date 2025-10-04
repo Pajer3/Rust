@@ -36,7 +36,7 @@ fn data_summary(
     let mut result: Vec<(String, char, u8)> = Vec::new();
 
     if let Some(_nums) = numbers_data {
-        println!("Nice, you got some numbers data — but I don’t have a sum for that yet.");
+        println!("Nice, you got some numbers data but I don’t have a sum for that yet.");
     } else {
         result = forms(string_data);
     }
