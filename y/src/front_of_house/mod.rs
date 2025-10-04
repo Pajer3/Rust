@@ -1,14 +1,15 @@
 pub mod hosting {
-    fn add_to_waitlist() {
+    pub fn add_to_waitlist() {
         // placeholder
     }
 
     pub fn seat_at_table() {
         // placeholder
     }
+
     pub mod random {
         pub fn random() {
-            
+
         }
     }
 }
@@ -26,3 +27,4 @@ pub mod serving {
         // placeholder
     }
 }
+
